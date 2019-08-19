@@ -25,7 +25,9 @@ router.get('/new', async(req, res, next) => {
         const pageTitle = "New Book";
         res.render('new-book.pug', {pageTitle});
     } catch (error) {
-        console.log(error);
+        err.status = 500;
+        err.message = "There was an internal server error."
+        next(err);
     }
 });
 
@@ -40,7 +42,9 @@ router.post('/new', async(req, res, next) => {
         });
         res.redirect('/books');
     } catch (error) {
-        console.log(error);
+        err.status = 500;
+        err.message = "There was a database error creating this book."
+        next(err);
     }
 });
 
@@ -53,8 +57,10 @@ router.get("/:id", async(req, res, next) => {
         const book = oneBook.toJSON();
         const headTitle = book.title;
         res.render('update-book.pug', {book, pageTitle, headTitle});
-    } catch(error) {
-        res.sendStatus(500);
+    } catch(err) {
+        err.status = 500;
+        err.message = "There was a database error retrieving this book."
+        next(err);
     };
   });
 
@@ -71,7 +77,9 @@ router.get("/:id", async(req, res, next) => {
         }, { fields: ['title', 'author', 'genre', 'year']});
         res.redirect('/books');
     } catch (error) {
-        console.log(error);
+        err.status = 500;
+        err.message = "There was a database error found when updating this book."
+        next(err);
     }
   });
 
@@ -82,7 +90,9 @@ router.get("/:id", async(req, res, next) => {
         await oneBook.destroy();
         res.redirect('/books');
       } catch (error) {
-        console.log(error);
+        err.status = 500;
+        err.message = "There was a database error when deleting this book."
+        next(err);
       }
   });
 
