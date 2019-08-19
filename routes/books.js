@@ -15,9 +15,34 @@ router.get('/', async (req, res, next) => {
         const books = allBooks.map(book => book.toJSON());
         res.render('index', {books, pageTitle, headTitle});
     } catch(error) {
-        c
+        res.sendStatus(500);
     };
   });
+
+//Get form to input new book
+router.get('/new', async(req, res, next) => {
+    try {
+        const pageTitle = "New Book";
+        res.render('new-book.pug', {pageTitle});
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+//Create (Insert) a new book
+router.post('/new', async(req, res, next) => {
+    try {
+        await Book.create({
+            title: req.body.title,
+            author: req.body.author,
+            genre: req.body.genre,
+            year: req.body.year
+        });
+        res.redirect('/books');
+    } catch (error) {
+        console.log(error);
+    }
+});
 
 //Get individual book
 router.get("/:id", async(req, res, next) => {
@@ -39,60 +64,27 @@ router.get("/:id", async(req, res, next) => {
         const oneBook = await Book.findByPk(req.params.id, {
             attributes: ['id', 'title', 'author', 'genre', 'year']});
         await oneBook.update({
-                title: req.body.title,
-                author: req.body.author,
-                genre: req.body.genre,
-                year: req.body.year
-            }, { fields: ['title', 'author', 'genre', 'year']});
+            title: req.body.title,
+            author: req.body.author,
+            genre: req.body.genre,
+            year: req.body.year
+        }, { fields: ['title', 'author', 'genre', 'year']});
+        res.redirect('/books');
     } catch (error) {
         console.log(error);
     }
   });
 
-/*
-router.put('/:id', function(req, res, next){
-  console.log(req.params);
-  Article.findByPk(req.params.id).then(function(article) {
-    if (article) {
-      return article.update(req.body);
-    } else {
-      res.send(404);
-    }
-  }).then(function(article){
-    res.redirect("/articles/" + article.id);
-  }).catch(function(err) {
-    if (err.name === "SequelizeValidationError") {
-      var article = Article.build(req.body);
-      article.id = req.params.id;
-      res.render('articles/edit', {
-        article: Article.build(req.body), 
-        title: 'Edit Article',
-        errors: err.errors
-      });
-    }n
-  }).catch(function(err) {
-    res.send(500);
+  //Delete individual book
+  router.delete('/:id', async(req, res,next) => {
+      try {
+        const oneBook = await Book.findByPk(req.params.id);
+        await oneBook.destroy();
+        res.redirect('/books');
+      } catch (error) {
+        console.log(error);
+      }
   });
-});
-*/
-
-  //get detail for single book
-//   router.get('/:id', async (req, res, next) => {
-//       const pageTitle = "Update Book";
-//       console.log("are you here");
-//       //res.render('update-book.pug', {pageTitle});
-//     // const pageTitle = "Puddlie";
-//     // await Book.findAll(
-//     //     {attributes: ['title', 'author', 'genre', 'year'],
-//     //      order: [["title", "ASC"]]
-//     //     }
-//     // ).then(function(allBooks) {
-//     //     books = allBooks.map(book => book.toJSON());
-//     //     res.render('index', {books, pageTitle});
-//     // }).catch(function(err) {
-//     //     res.send(500);
-//     // });
-//   });
 
 
 module.exports = router;
