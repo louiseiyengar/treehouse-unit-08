@@ -2,6 +2,8 @@ extends layout.pug
 
 block main
     h1= pageTitle
+    if(action)
+        h3.message '#{title}' was #{action}.
     p
         a.button(href='books/new') Create New Book
     table

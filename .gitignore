@@ -63,3 +63,4 @@ typings/
 #development folders
 example-markup/
 backupdb/
+style-backup.css

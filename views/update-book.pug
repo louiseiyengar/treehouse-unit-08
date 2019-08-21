@@ -2,7 +2,9 @@ extends layout.pug
 
 block main
     h1= pageTitle
+    include input-errors
     form(method='post' action=`/books/${book.id}?_method=PUT`)
+        input(type='hidden' name='id' value=book.id)
         p
             label(for='title') Title
             input#title(name='title' type='text' value=book.title)

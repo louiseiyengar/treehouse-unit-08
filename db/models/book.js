@@ -9,10 +9,10 @@ module.exports = (sequelize) => {
             allowNull: false, // disallow null
             validate: {
                 notNull: {
-                    msg: 'Please provide a value for "title"'
+                    msg: 'Please provide a value for "Title"'
                 },
                 notEmpty: {
-                    msg: 'Please provide a value for "title"',
+                    msg: 'Please provide a value for "Title"',
                 }
             }
         },
@@ -21,10 +21,10 @@ module.exports = (sequelize) => {
             allowNull: false, // disallow null
             validate: {
                 notNull: {
-                    msg: 'Please provide a value for "author"'
+                    msg: 'Please provide a value for "Author"'
                 },
                 notEmpty: {
-                    msg: 'Please provide a value for "author"',
+                    msg: 'Please provide a value for "Author"',
                 }
             }
         },
@@ -36,7 +36,7 @@ module.exports = (sequelize) => {
             validate: {
                 isAfter: {
                     args: '1000',
-                    msg: 'Please provide a value on or after 1000 for "year"'
+                    msg: 'Please provide a 4-digit date value on or after 1000 for "Year"'
                 }
             }
         }
