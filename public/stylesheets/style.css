@@ -29,6 +29,15 @@ form a.button, input[type=submit] {
   transition: 0.4s;
 }
 
+form#search {
+  padding: 1em 0;
+  margin-left: -0.5em;
+}
+
+form#search input[value="Search"] {
+  margin-left: 0;
+}
+
 input[type=submit] {
   border: 0;
 }
@@ -92,6 +101,11 @@ input[type=text] {
   width: 300px;
 }
 
-.error, .message {
+.error {
   color: rgb(236, 15, 15);
+}
+
+.message {
+  color: 0.5rem;
+  color: #019875;
 }

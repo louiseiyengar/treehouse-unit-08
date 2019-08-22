@@ -2,22 +2,30 @@ extends layout.pug
 
 block main
     h1= pageTitle
-    if(action)
-        h3.message '#{title}' was #{action}.
     p
         a.button(href='books/new') Create New Book
-    table
-        thead
-            tr
-            th Title
-            th Author
-            th Genre
-            th Year
-        tbody
-            each book in books
+    form#search(method='post' action='/books')
+        input#search(type='text' name='search' placeholder='Search for a book' required)
+        input(type='submit' value='Search')
+    if(action)
+        h3.message '#{title}' was #{action}.
+    else if (searchMessage)
+        h3.message= searchMessage
+    if(books)
+        table
+            thead
                 tr
-                    td
-                        a(href=`/books/${book.id}`)= book.title
-                    td= book.author
-                    td= book.genre
-                    td= book.year
+                th Title
+                th Author
+                th Genre
+                th Year
+            tbody
+                each book in books
+                    tr
+                        td
+                            a(href=`/books/${book.id}`)= book.title
+                        td= book.author
+                        td= book.genre
+                        td= book.year
+    else
+        h3.message= 'No books in our database met your search.'

@@ -3,6 +3,7 @@ const router = express.Router();
 
 const db = require('../db');
 const {Book} = db.models;
+const { Op } = db.Sequelize;    //extract Op from db.Sequelize for db searches 
 
 //helper functions
 function cleanInput(book) {
@@ -11,7 +12,8 @@ function cleanInput(book) {
             bookPropArray = book[key].replace(/\s+/g, ' ')       //remove any extra spaces
                 .split(' ')
                 .map(word => {
-                     return word.charAt(0).toUpperCase() + word.slice(1);   //uppercase first letter of each work
+                    let changeWord = word.toLowerCase();
+                    return changeWord.charAt(0).toUpperCase() + changeWord.slice(1);   //uppercase first letter of each work
                 });
             book[key] = bookPropArray.join(' ');
          }
@@ -35,6 +37,39 @@ router.get('/', async (req, res, next) => {
         err.message = "There was a database error retrieving the book listing."
         next(err);
     };
+});
+
+//Search list of books
+router.post('/', async (req, res, next) => {
+    try {
+        const pageTitle = headTitle = "Books";
+        const searchTerm = '%' + req.body.search + '%';
+        const searchMessage = `Search Term: ${req.body.search}`
+        const searchBooks = await Book.findAll(
+            {attributes: ['id', 'title', 'author', 'genre', 'year'],
+             where: {
+                [Op.or]: [
+                    { 
+                        title: {[Op.like]: searchTerm}
+                    },
+                    {
+                        author: {[Op.like]: searchTerm}
+                    },
+                    {
+                        genre: {[Op.like]: searchTerm}
+                    },
+                    {
+                        year: {[Op.like]: searchTerm}
+                    }
+                ]
+              },
+            order: [["title", "ASC"]]});
+        let books = searchBooks.map(book => book.toJSON());
+        books = (books.length < 1) ? '' : books;
+        res.render('index', {books, pageTitle, headTitle, searchMessage});
+    } catch (err) {
+        console.log(err);
+    }
 });
 
 //Get form to input new book

@@ -1,4 +1,3 @@
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override')
@@ -6,6 +5,7 @@ const methodOverride = require('method-override')
 //database and database models
 const db = require('./db');
 const { Book } = db.models;
+const { Op } = db.Sequelize;    //extract Op from db.Sequelize for db searches 
 
 const app = express();
 
