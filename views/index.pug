@@ -11,6 +11,7 @@ block main
         h3.message '#{title}' was #{action}.
     else if (searchMessage)
         h3.message= searchMessage
+    
     if(books)
         table
             thead
@@ -31,12 +32,13 @@ block main
     else
         h3.message= 'No books in our database met your search.'
 
-    if(pageCount)
+    if(pageCount > 1)
         .pagination
             ul
                 - var n = 1;
                 while n <= pageCount
-                    li= n++
+                    li
+                        a(href=`/books?page=${n}`)= n++
 
     if(searchMessage)
         button(type='button')

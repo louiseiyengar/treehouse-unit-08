@@ -5,6 +5,9 @@ const db = require('../db');
 const {Book} = db.models;
 const { Op } = db.Sequelize;    //extract Op from db.Sequelize for db searches 
 
+//global variables
+const numRecsPerPage = 5;
+
 //helper functions
 function cleanInput(book) {
     for(let key in book) {
@@ -26,10 +29,13 @@ router.get('/', async (req, res, next) => {
     const pageTitle = headTitle = "Books";
     const action = req.query.action;
     const title = req.query.title;
-    const numRecsPerPage = 25
+    const page = (req.query.page) ? (req.query.page - 1) : 0;
+    const offset = page * numRecsPerPage;
     try {
         const allBooks = await Book.findAndCountAll(
             {attributes: ['id', 'title', 'author', 'genre', 'year'],
+            offset: offset,
+            limit: numRecsPerPage,
             order: [["title", "ASC"]]});
         const pageCount = Math.ceil(allBooks.count / numRecsPerPage);
         const books = allBooks.rows.map(book => book.toJSON());
