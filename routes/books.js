@@ -26,12 +26,14 @@ router.get('/', async (req, res, next) => {
     const pageTitle = headTitle = "Books";
     const action = req.query.action;
     const title = req.query.title;
+    const numRecsPerPage = 25
     try {
-        const allBooks = await Book.findAll(
+        const allBooks = await Book.findAndCountAll(
             {attributes: ['id', 'title', 'author', 'genre', 'year'],
             order: [["title", "ASC"]]});
-        const books = allBooks.map(book => book.toJSON());
-        res.render('index', {books, pageTitle, headTitle, action, title});
+        const pageCount = Math.ceil(allBooks.count / numRecsPerPage);
+        const books = allBooks.rows.map(book => book.toJSON());
+        res.render('index', {books, pageCount, pageTitle, headTitle, action, title});
     } catch(err) {
         err.status = 500;
         err.message = "There was a database error retrieving the book listing."

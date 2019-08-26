@@ -109,3 +109,29 @@ input[type=text] {
   color: 0.5rem;
   color: #019875;
 }
+
+/* Pagination */
+div.pagination {
+  margin-left: 2%;
+}
+
+div.pagination li {
+  margin-right: 0.5rem;
+  padding: 0.2rem 0.5rem;
+  border: 2px solid #019875;
+  border-radius: 20%;
+  display: inline-block;
+  color: #019875;
+  font-weight: bold;
+}
+
+button {
+  margin-top: 1.5rem;
+  margin-right: 0.5rem;
+  padding: 0.2rem 0.5rem;
+  border: 2px solid #019875;
+  background-color: white;
+  color: #019875;
+  font-weight: bold;
+  font: 18px "Garamond", serif;
+}

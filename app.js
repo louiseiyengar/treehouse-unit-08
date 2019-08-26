@@ -2,10 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override')
 
-//database and database models
+//database
 const db = require('./db');
-const { Book } = db.models;
-const { Op } = db.Sequelize;    //extract Op from db.Sequelize for db searches 
 
 const app = express();
 
@@ -41,8 +39,10 @@ app.use((req, res, next) => {
     try {
         await db.sequelize.authenticate();
         console.log('Successful connection');
-    } catch (error) {
-        console.log("muddlie", error);
+    } catch (err) {
+        err.message = 'There was an error connecting to the database';
+        err.status = 500;
+        next(err);
     }
 }) ();
 

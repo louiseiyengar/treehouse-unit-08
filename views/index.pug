@@ -1,4 +1,4 @@
-extends layout.pug
+extends layout
 
 block main
     h1= pageTitle
@@ -27,5 +27,17 @@ block main
                         td= book.author
                         td= book.genre
                         td= book.year
+                        td= pageCount
     else
         h3.message= 'No books in our database met your search.'
+
+    if(pageCount)
+        .pagination
+            ul
+                - var n = 1;
+                while n <= pageCount
+                    li= n++
+
+    if(searchMessage)
+        button(type='button')
+            a(href='/books') View list of all books
