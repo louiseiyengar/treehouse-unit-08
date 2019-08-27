@@ -6,9 +6,18 @@ const {Book} = db.models;
 const { Op } = db.Sequelize;    //extract Op from db.Sequelize for db searches 
 
 //global variables
+//how many books should appear on the page for the 'all books' listing
 const numRecsPerPage = 15;
 
-//helper functions
+//helper function
+
+/**
+ * This function will take a book object, and return the book object with the 
+ * title, author, and genre properties formatted so that each word has only the first letter
+ * capitalized.
+ * @param {object} book object with user inputted properties (create and update input)
+ * @return {object} book object with properties formatted so that each word has only first letter in uppercase.
+*/
 function cleanInput(book) {
     for(let key in book) {
         if (key !== 'year') {
@@ -29,7 +38,7 @@ router.get('/', async (req, res, next) => {
     const pageTitle = headTitle = "Books";
     const action = req.query.action;
     const title = req.query.title;
-    const page = (req.query.page) ? (req.query.page - 1) : 0;
+    const page = (req.query.page) ? (req.query.page - 1) : 0;   //get page form querystring to calculate offset
     const offset = page * numRecsPerPage;
     try {
         const allBooks = await Book.findAndCountAll(
@@ -73,10 +82,12 @@ router.post('/', async (req, res, next) => {
               },
             order: [["title", "ASC"]]});
         let books = searchBooks.map(book => book.toJSON());
-        books = (books.length < 1) ? '' : books;
+        books = (books.length < 1) ? '' : books;       //if no books, book variable is empty string.
         res.render('index', {books, pageTitle, headTitle, searchMessage});
     } catch (err) {
-        console.log(err);
+        err.status = 500;
+        err.message = "There was a database error searching for your term."
+        next(err);
     }
 });
 

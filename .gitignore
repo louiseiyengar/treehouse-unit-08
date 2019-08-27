@@ -60,7 +60,7 @@ typings/
 # next.js build output
 .next
 
-#development folders
+#development folders and files
 example-markup/
 backupdb/
 style-backup.css
