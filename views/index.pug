@@ -1,7 +1,6 @@
 extends layout
 
 block main
-    h1= pageTitle
     p
         a.button(href='books/new') Create New Book
     form#search(method='post' action='/books')
@@ -28,7 +27,6 @@ block main
                         td= book.author
                         td= book.genre
                         td= book.year
-                        td= pageCount
     else
         h3.message= 'No books in our database met your search.'
 
@@ -37,8 +35,11 @@ block main
             ul
                 - var n = 1;
                 while n <= pageCount
-                    li
-                        a(href=`/books?page=${n}`)= n++
+                    a(href=`/books?page=${n}`)
+                        if(n == page)
+                            li.active= n++
+                        else
+                            li= n++
 
     if(searchMessage)
         button(type='button')

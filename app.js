@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override')
 
-//database
+//database connection and models
 const db = require('./db');
 
 const app = express();

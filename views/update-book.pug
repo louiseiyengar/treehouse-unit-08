@@ -1,7 +1,6 @@
 extends layout.pug
 
 block main
-    h1= pageTitle
     include input-errors
     form(method='post' action=`/books/${book.id}?_method=PUT`)
         input(type='hidden' name='id' value=book.id)
@@ -21,6 +20,7 @@ block main
             input(type='submit' value='Update Book')
     form(method='post' action=`/books/${book.id}?_method=DELETE` onsubmit="return confirm('Do you really want to delete this book?');")
         p
-            a.button(href='/') Cancel
-        p
             input(type='submit' value='Delete Book')
+        p
+            button(type='button')
+                a(href='/') View list of all books

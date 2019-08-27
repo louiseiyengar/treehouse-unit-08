@@ -10,9 +10,9 @@ a {
   transition: 0.4s;
 }
 
-  a:hover {
-    color: black;
-  }
+a:hover {
+  color: black;
+}
 
 a.button, input[type=submit] {
   color: white;
@@ -55,6 +55,13 @@ ul {
   list-style-type: none;
   margin-bottom: 10px;
   line-height: 1.3em;
+}
+
+h1 {
+  border-bottom: 2px solid lightslategray;
+  font-size: 3.5rem;
+  color: #019875;
+  text-shadow: 2px 2px 3px #000;
 }
 
 h2 {
@@ -107,16 +114,16 @@ input[type=text] {
 
 .message {
   color: 0.5rem;
-  color: #019875;
+  color: #df480d;
 }
 
 /* Pagination */
 div.pagination {
-  margin-left: 2%;
+  margin: 1.5rem 2%;
 }
 
 div.pagination li {
-  margin-right: 0.5rem;
+  margin-left: 0.5rem;
   padding: 0.2rem 0.5rem;
   border: 2px solid #019875;
   border-radius: 20%;
@@ -125,6 +132,17 @@ div.pagination li {
   font-weight: bold;
 }
 
+div.pagination li:hover, div.pagination li:active {
+  background-color:#96c9bd;
+  color: white;
+}
+
+div.pagination li.active {
+  background-color: #019875;
+  color: white;
+}
+
+/* View All books button */
 button {
   margin-top: 1.5rem;
   margin-right: 0.5rem;
@@ -134,4 +152,17 @@ button {
   color: #019875;
   font-weight: bold;
   font: 18px "Garamond", serif;
+}
+
+button:hover, button:active {
+  background-color: #019875;
+}
+
+button a:hover, button a:active {
+  color: white;
+}
+
+p button {
+  margin-left: 140px;
+  margin-top: -5px;
 }

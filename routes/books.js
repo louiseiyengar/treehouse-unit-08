@@ -6,7 +6,7 @@ const {Book} = db.models;
 const { Op } = db.Sequelize;    //extract Op from db.Sequelize for db searches 
 
 //global variables
-const numRecsPerPage = 5;
+const numRecsPerPage = 15;
 
 //helper functions
 function cleanInput(book) {
@@ -39,7 +39,7 @@ router.get('/', async (req, res, next) => {
             order: [["title", "ASC"]]});
         const pageCount = Math.ceil(allBooks.count / numRecsPerPage);
         const books = allBooks.rows.map(book => book.toJSON());
-        res.render('index', {books, pageCount, pageTitle, headTitle, action, title});
+        res.render('index', {books, pageCount, pageTitle, headTitle, action, title, page: page + 1});
     } catch(err) {
         err.status = 500;
         err.message = "There was a database error retrieving the book listing."
