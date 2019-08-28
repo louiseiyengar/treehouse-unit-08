@@ -23,5 +23,7 @@ to start the server and application.  You should see the message: 'The applicati
 5) Enter 'localhost:3000' in the address bar of your browser, and you should see the web page below.
 
 Screenshot of the SQL Library Manager page displaying first page of the display of all books:
+![Unit08Example](https://user-images.githubusercontent.com/42808209/63816737-56d0f680-c907-11e9-82e6-f2f445ddcdcc.jpg)
+
 
 
