@@ -48,7 +48,7 @@ router.get('/', async (req, res, next) => {
             order: [["title", "ASC"]]});
         const pageCount = Math.ceil(allBooks.count / numRecsPerPage);
         const books = allBooks.rows.map(book => book.toJSON());
-        res.render('index', {books, pageCount, pageTitle, headTitle, action, title, page: page + 1});
+        res.render('index', {books, pageCount, pageTitle, headTitle, action, title, page: page + 1, totalBooks: allBooks.count});
     } catch(err) {
         err.status = 500;
         err.message = "There was a database error retrieving the book listing."
