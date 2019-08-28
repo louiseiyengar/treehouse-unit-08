@@ -21,13 +21,15 @@ const numRecsPerPage = 15;
 function cleanInput(book) {
     for(let key in book) {
         if (key !== 'year') {
-            bookPropArray = book[key].replace(/\s+/g, ' ')       //remove any extra spaces
+            const bookPropArray = book[key].replace(/\s+/g, ' ')       //remove any extra spaces
                 .split(' ')
                 .map(word => {
                     let changeWord = word.toLowerCase();
                     return changeWord.charAt(0).toUpperCase() + changeWord.slice(1);   //uppercase first letter of each work
                 });
             book[key] = bookPropArray.join(' ');
+         } else {
+             book[key] = book[key].replace(/\s+/g, '');     //replace any spaces in year field
          }
     }
     return book;
@@ -94,8 +96,9 @@ router.post('/', async (req, res, next) => {
 //Get form to input new book
 router.get('/new', async(req, res, next) => {
     try {
-        const pageTitle = "New Book";
-        res.render('new-book.pug', {pageTitle});
+        book = {};
+        const pageTitle = headTitle = "New Book";
+        res.render('new-book.pug', {pageTitle, headTitle});
     } catch (err) {
         err.status = 500;
         err.message = "There was an internal server error."
@@ -117,11 +120,10 @@ router.post('/new', async(req, res, next) => {
         res.redirect(`/books?action=added&title=${encodeURI(book.title)}`);
     } catch (err) {
         if (err.name === "SequelizeValidationError") {
-            const pageTitle = "New Book";
+            const pageTitle = headTitle = "New Book";
             const errors = err.errors
-            res.render('new-book.pug', {pageTitle, errors});
+            res.render('new-book.pug', {pageTitle, headTitle, errors});
         } else {
-            console.log(err);
             err.status = 500;
             err.message = "There was a database error creating this book."
             next(err);

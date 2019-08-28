@@ -10,7 +10,7 @@ block main
         h3.message '#{title}' was #{action}.
     else if (searchMessage)
         h3.message= searchMessage
-    else if(totalBooks)
+    if((totalBooks) && (!searchMessage))
         p.count There are #{totalBooks} books in this library.
     
     if(books)

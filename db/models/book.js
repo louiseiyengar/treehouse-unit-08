@@ -24,19 +24,24 @@ module.exports = (sequelize) => {
                     msg: 'Please provide a value for "Author"'
                 },
                 notEmpty: {
-                    msg: 'Please provide a value for "Author"',
+                    msg: 'Please provide a value for "Author"'
                 }
             }
         },
         genre: {
-            type: Sequelize.STRING
+            type: Sequelize.STRING,
+            defaultValue: ''
         },
         year: {
             type: Sequelize.INTEGER,
+            defaultValue: '',
+            allowNull: true,
             validate: {
-                isAfter: {
-                    args: '1000',
-                    msg: 'Please provide a 4-digit date value on or after 1000 for "Year"'
+                //if year exists and is not a four digit integer, throw an error
+                testEmptyOrInteger () {
+                    if ((this.year) && (!(/^\d{4}$/.test(this.year)))) {
+                        throw new Error('Leave the "Year" field blank or enter a 4-digit year');
+                    }
                 }
             }
         }

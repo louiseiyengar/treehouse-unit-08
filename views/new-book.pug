@@ -2,19 +2,24 @@ extends layout.pug
 
 block main
     include input-errors
+    - var title = (book) ? book.title : '';
+    - var author = (book) ? book.author : '';
+    - var genre = (book) ? book.genre : '';
+    - var year = (book) ? book.year : '';
+
     form(method='post' action=`/books/new`)
         p
             label(for='title') Title
-            input#title(name='title' type='text')
+            input#title(name='title' type='text' value=title)
         p
             label(for='author') Author
-            input#author(name='author' type='text')
+            input#author(name='author' type='text' value=author)
         p
             label(for='genre') Genre
-            input#genre(name='genre' type='text')
+            input#genre(name='genre' type='text' value=genre)
         p
             label(for='year') Year
-            input#year(name='year' type='text')
+            input#year(name='year' type='text' value=year)
         p
             input(type='submit' value='Create New Book')
         p
