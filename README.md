@@ -12,7 +12,7 @@ If you request a page that doesn't exist, for example (localhost:3000/does-not-e
 
 If the is also a 500 error page for all other errors -- problems connecting to the database, an attempt to select a book with an id not in the database, or other server errors.
 
-If you add or edit a book, the title, author, and genre are required fields.  You will not be able to add or edit a book without those fields, and appropriaate error messages will appear on the Edit and Create a New Book pages.
+If you add or edit a book, the title, author, and year are required fields.  You will not be able to add or edit a book without those fields, and appropriate error messages will appear on the Edit and Create a New Book pages.  Note that year must be a 4-digit value after 1000.
 
 ======= Instuctions to view project locally =========
 1) To run this project locally, you must have node.js and npm installed.
