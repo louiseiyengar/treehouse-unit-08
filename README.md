@@ -2,9 +2,9 @@
 
 For this project, I used node.js, a SQLite database, the Sequelize ORM, the Express web application framework, and Pug for template rendering.  
 
-This project displays all the books contained in a SQLite library database.  Each page will display 15 books, and page links are displayed at the bottom of the book list. A user can click a button to add a new book or click on a book title where the user will see a book detail page.  This page will give the user the option to update the title, author, genre, or date of the book record selected.  There is also a button with the option to delete the book selected.
+This project displays all the books contained in a SQLite library database.  Each page will display 15 books, and page links are displayed at the bottom of the book list. A user can click a button to add a new book or click on a book title, which will take the user to a book detail page.  This page will give the user the option to update the title, author, genre, or date of the book record selected.  There is also a button with the option to delete the book selected.
 
-In addition, there is a Search field which allows the user to search the title, author, genre and date fields for a term entered.  The search is case-insensitive and allows partial matches for strings.
+In addition, the page listing all books contains a Search field which allows the user to search the title, author, genre and date fields for a term entered.  The search is case-insensitive and allows partial matches for strings.
 
 ======= Error Processing ==========================
 
