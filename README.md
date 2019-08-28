@@ -8,7 +8,7 @@ In addition, the page listing all books contains a Search field which allows the
 
 ======= Error Processing ==========================
 
-If you request a page that doesn't exist or a project that doesn't exist, for example (localhost:3000/does-not-exist/) you will see both a 404 error page and a console.log message indicating there was a 404 error.
+If you request a page that doesn't exist, for example (localhost:3000/does-not-exist/) you will see both a 404 error page and a console.log message indicating there was a 404 error.
 
 If the is also a 500 error page for all other errors -- problems connecting to the database, an attempt to select a book with an id not in the database, or other server errors.
 
