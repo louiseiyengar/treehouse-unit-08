@@ -6,6 +6,8 @@ This project displays all the books contained in a SQLite library database.  Eac
 
 In addition, the page listing all books contains a Search field which allows the user to search the title, author, genre and date fields for a term entered.  The search is case-insensitive and allows partial matches for strings.
 
+In addition, if you add or edit a book, the title, author, and genre are required fields.  You will not be able to add or edit a book without those fields, and appropriaate error messages will appear on the Edit and Create a New Book pages.
+
 ======= Error Processing ==========================
 
 If you request a page that doesn't exist, for example (localhost:3000/does-not-exist/) you will see both a 404 error page and a console.log message indicating there was a 404 error.
