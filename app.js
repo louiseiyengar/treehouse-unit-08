@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override')
+const port = process.env.PORT || 3000;
 
 //database connection and models
 const db = require('./db');
@@ -60,6 +61,6 @@ app.use((err, req, res, next) => {
     }
 });
 
-app.listen(3000, () => {
-    console.log("The application is running on localhost:3000");
+app.listen(port, () => {
+    console.log(`The application is running on localhost:${port}`);
 });
