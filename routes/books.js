@@ -122,7 +122,7 @@ router.post('/new', async(req, res, next) => {
         if (err.name === "SequelizeValidationError") {
             const pageTitle = headTitle = "New Book";
             const errors = err.errors
-            res.render('new-book.pug', {pageTitle, headTitle, errors});
+            res.render('new-book.pug', {book, pageTitle, headTitle, errors});
         } else {
             err.status = 500;
             err.message = "There was a database error creating this book."
