@@ -14,7 +14,12 @@ If the is also a 500 error page for all other errors -- problems connecting to t
 
 If you add or edit a book, the title and author fields are required.  You will not be able to add or edit a book without those fields, and appropriate error messages will appear on the Edit and Create a New Book pages. In addition, the 'year' field must be a 4-digit integer or left blank.
 
+=====================================================
+
+URL to view project: https://librarybooks-db.herokuapp.com
+
 ======= Instuctions to view project locally =========
+
 1) To run this project locally, you must have node.js and npm installed.
 2) Download or clone the project from this repo.
 3) The project uses the Express web application framework and Pug for template rendering. It also uses the SQLite database and the Sequelize ORM.  You will install these by running:
