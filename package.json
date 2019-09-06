@@ -11,6 +11,9 @@
     "url": "git+https://github.com/louiseiyengar/treehouse-unit-08.git"
   },
   "keywords": [],
+  "engines": {
+    "node": "10.15.3"
+  },
   "author": "",
   "license": "ISC",
   "bugs": {
